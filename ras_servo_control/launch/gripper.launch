@@ -1,0 +1,9 @@
+<launch>
+
+
+<node pkg="arduino_servo_control" type="servo_control.py" name="servo_control" /> 
+
+<node pkg="arduino_servo_control" type="gripper.py" name="gripper" /> 
+
+
+</launch>

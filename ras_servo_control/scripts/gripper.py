@@ -45,11 +45,12 @@ def grip_callback(msg):
     global FLAG_GRIPPED, FLAG_FOUND_OBJECT,FLAG_CLOSE, FLAG_GRIP, FLAG_OPEN
     flag = msg.data
     #rospy.loginfo('flag')
+
     if flag == "open" : 
         FLAG_OPEN = True
     elif flag == "close":
         FLAG_CLOSE = True
-    elif flag = "grip":
+    elif flag == "grip":
         FLAG_GRIP = True
 
 
@@ -63,19 +64,25 @@ def main():
     # rospy.Subscriber("/flag_done", std_msgs.msg.String, flag_callback)
     rospy.Subscriber("/gripper_state", std_msgs.msg.String, grip_callback)
 
+    
     while not rospy.is_shutdown():
+
+        #FLAG_OPEN = False
+        #FLAG_CLOSE = False
+        #FLAG_GRIP = True
+        
         if FLAG_OPEN:
-            GRIP(70, 110) 
+            GRIP(0, 105) # 0
             print("open")
             time.sleep(1)
             FLAG_OPEN = False
         elif FLAG_CLOSE:
-            GRIP(170, 10)
+            GRIP(95, 10) # 95
             print("close")
             time.sleep(1)
             FLAG_CLOSE = False
         elif FLAG_GRIP:
-            GRIP(130,50)
+            GRIP(55,50) # 55
             print("grip")
             time.sleep(1)
             FLAG_GRIP = False
